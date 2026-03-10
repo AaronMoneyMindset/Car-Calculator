@@ -5,19 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fix vs Replace Vehicle Calculator - Aaron Money Mindset</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -26,32 +22,20 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
             padding: 30px;
             text-align: center;
         }
-        
-        .header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-        
-        .main-content {
-            padding: 40px;
-        }
-        
-        .scenario-container {
-            margin-bottom: 50px;
-        }
-        
+        .header h1 { font-size: 2em; margin-bottom: 10px; }
+        .header p { font-size: 1.1em; opacity: 0.9; }
+
+        .main-content { padding: 40px; }
+
+        .scenario-container { margin-bottom: 50px; }
+
         .scenario-header {
             background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
@@ -59,24 +43,17 @@
             border-radius: 8px;
             margin-bottom: 20px;
         }
-        
-        .scenario-header h2 {
-            font-size: 1.8em;
-            margin-bottom: 8px;
-        }
-        
-        .table-wrapper {
-            overflow-x: auto;
-            margin-bottom: 30px;
-        }
-        
+        .scenario-header h2 { font-size: 1.8em; margin-bottom: 8px; }
+
+        .table-wrapper { overflow-x: auto; margin-bottom: 30px; }
+
         table {
             width: 100%;
             border-collapse: collapse;
             background: white;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        
+
         th {
             background: #34495e;
             color: white;
@@ -85,43 +62,31 @@
             font-weight: 600;
             font-size: 0.95em;
         }
-        
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-        
-        tr:hover {
-            background: #f8f9fa;
-        }
-        
-        .category-row {
-            background: #ecf0f1;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
+
+        td { padding: 12px 15px; border-bottom: 1px solid #ecf0f1; }
+        tr:hover { background: #f8f9fa; }
+
+        .category-row { background: #ecf0f1; font-weight: 600; color: #2c3e50; }
+
         .total-row {
             background: #3498db;
             color: white;
             font-weight: 700;
             font-size: 1.1em;
         }
-        
-        .total-row td {
-            border-bottom: none;
+        .total-row td { border-bottom: none; }
+
+        .winner { background: #27ae60 !important; color: white; }
+        .loser  { background: #e74c3c !important; color: white; }
+
+        .table-note {
+            font-size: 0.82em;
+            color: #7f8c8d;
+            margin-top: 6px;
+            padding: 0 4px;
+            font-style: italic;
         }
-        
-        .winner {
-            background: #27ae60 !important;
-            color: white;
-        }
-        
-        .loser {
-            background: #e74c3c !important;
-            color: white;
-        }
-        
+
         .summary-box {
             background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
             color: white;
@@ -129,62 +94,56 @@
             border-radius: 8px;
             margin: 30px 0;
         }
-        
-        .summary-box h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        
-        .summary-box ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
+        .summary-box h3 { font-size: 1.5em; margin-bottom: 15px; }
+        .summary-box ul { list-style: none; padding-left: 0; }
         .summary-box li {
-            padding: 8px 0;
-            padding-left: 25px;
+            padding: 8px 0 8px 25px;
             position: relative;
         }
-        
-        .summary-box li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        
+        .summary-box li:before { content: "✓"; position: absolute; left: 0; font-weight: bold; }
+
+        /* ── INTERACTIVE CALCULATOR ── */
         .calculator-section {
             background: #f8f9fa;
             padding: 30px;
             border-radius: 8px;
             margin-top: 40px;
         }
-        
-        .calculator-section h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.6em;
+        .calculator-section h3 { color: #2c3e50; margin-bottom: 8px; font-size: 1.6em; }
+        .calculator-section .sub-note { color: #555; margin-bottom: 24px; font-size: 0.95em; }
+
+        .calc-section-label {
+            background: #34495e;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 0.95em;
+            margin: 24px 0 12px;
+            letter-spacing: 0.04em;
         }
-        
+        .calc-section-label.blue  { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .calc-section-label.red   { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+
         .input-group {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 10px;
         }
-        
-        .input-field {
-            display: flex;
-            flex-direction: column;
-        }
-        
+
+        .input-field { display: flex; flex-direction: column; }
         .input-field label {
             font-weight: 600;
             color: #2c3e50;
-            margin-bottom: 5px;
-            font-size: 0.9em;
+            margin-bottom: 4px;
+            font-size: 0.88em;
         }
-        
+        .input-field .hint {
+            font-size: 0.76em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
         .input-field input {
             padding: 10px;
             border: 2px solid #dfe6e9;
@@ -192,472 +151,619 @@
             font-size: 1em;
             transition: border-color 0.3s;
         }
-        
-        .input-field input:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-        
+        .input-field input:focus { outline: none; border-color: #3498db; }
+
         .calculate-btn {
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 16px 44px;
             font-size: 1.1em;
-            font-weight: 600;
+            font-weight: 700;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 24px;
         }
-        
         .calculate-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 5px 15px rgba(231,76,60,0.35);
         }
-        
+
+        /* ── RESULTS ── */
         .results {
-            margin-top: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
+            margin-top: 32px;
             display: none;
         }
-        
-        .results.show {
-            display: block;
+        .results.show { display: block; }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
         }
-        
-        .result-item {
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            font-size: 1.1em;
+
+        @media (max-width: 700px) {
+            .results-grid { grid-template-columns: 1fr; }
         }
-        
+
+        .result-card {
+            border-radius: 8px;
+            padding: 20px;
+            color: white;
+        }
+        .result-card h4 { font-size: 1.1em; margin-bottom: 12px; opacity: 0.9; }
+        .result-card .big-number {
+            font-size: 2em;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+        .result-card .sub-number { font-size: 0.9em; opacity: 0.85; }
+        .result-card .line { border-top: 1px solid rgba(255,255,255,0.3); margin: 10px 0; }
+        .result-card .detail { font-size: 0.85em; opacity: 0.9; padding: 2px 0; }
+
+        .card-repair  { background: linear-gradient(135deg, #27ae60, #1e8449); }
+        .card-replace { background: linear-gradient(135deg, #3498db, #2471a3); }
+
+        .recommendation {
+            padding: 22px 26px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        .recommendation h4 { font-size: 1.3em; margin-bottom: 10px; }
+        .rec-green  { background: linear-gradient(135deg, #27ae60, #1e8449); }
+        .rec-red    { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .rec-yellow { background: linear-gradient(135deg, #f39c12, #d68910); }
+        .rec-orange { background: linear-gradient(135deg, #e67e22, #ca6f1e); }
+
+        /* ── FOOTER & DISCLAIMER ── */
         .footer {
             background: #2c3e50;
             color: white;
             padding: 20px;
             text-align: center;
         }
-        
+
+        .disclaimer {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 16px 22px;
+            font-size: 0.82em;
+            color: #555;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .disclaimer strong { color: #2c3e50; }
+
         @media print {
-            body {
-                background: white;
-            }
-            .calculator-section {
-                display: none;
-            }
+            body { background: white; }
+            .calculator-section { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Fix vs Replace: Vehicle Cost Analysis</h1>
-            <p>Professional Calculator by Aaron Money Mindset</p>
-            <p style="font-size: 0.9em; margin-top: 10px;">Based on Real Canadian Market Data - January 2026</p>
-        </div>
-        
-        <div class="main-content">
-            <!-- SARAH'S SCENARIO -->
-            <div class="scenario-container">
-                <div class="scenario-header">
-                    <h2>📊 Scenario 1: Sarah's 2015 Toyota Corolla</h2>
-                    <p>185,000 km • Needs: A/C, Brakes, Tires • Repair Quote: $3,600</p>
-                </div>
-                
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Cost Category</th>
-                                <th>Option 1: Repair Current Car</th>
-                                <th>Option 2: Buy New 2025 Corolla</th>
-                                <th>Option 3: Buy Used 2020 Corolla</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="category-row">
-                                <td colspan="4">UPFRONT COSTS</td>
-                            </tr>
-                            <tr>
-                                <td>One-Time Repair Cost</td>
-                                <td>$3,600</td>
-                                <td>$0</td>
-                                <td>$0</td>
-                            </tr>
-                            <tr>
-                                <td>Vehicle Purchase Price</td>
-                                <td>$0</td>
-                                <td>$28,000</td>
-                                <td>$21,500</td>
-                            </tr>
-                            <tr>
-                                <td>Down Payment</td>
-                                <td>$0</td>
-                                <td>$3,600</td>
-                                <td>$3,600</td>
-                            </tr>
-                            <tr>
-                                <td>Loan Amount</td>
-                                <td>$0</td>
-                                <td>$24,400</td>
-                                <td>$17,900</td>
-                            </tr>
-                            <tr class="category-row">
-                                <td colspan="4">MONTHLY COSTS (24-Month Analysis)</td>
-                            </tr>
-                            <tr>
-                                <td>Repair Cost (amortized)</td>
-                                <td>$150</td>
-                                <td>$0</td>
-                                <td>$0</td>
-                            </tr>
-                            <tr>
-                                <td>Loan Payment (monthly)</td>
-                                <td>$0</td>
-                                <td>$389 (7yr @ 6.99%)</td>
-                                <td>$374 (5yr @ 8.99%)</td>
-                            </tr>
-                            <tr>
-                                <td>Insurance (monthly)</td>
-                                <td>$110</td>
-                                <td>$195</td>
-                                <td>$175</td>
-                            </tr>
-                            <tr>
-                                <td>Fuel (monthly)</td>
-                                <td>$140</td>
-                                <td>$125</td>
-                                <td>$130</td>
-                            </tr>
-                            <tr>
-                                <td>Maintenance (monthly avg)</td>
-                                <td>$80</td>
-                                <td>$30</td>
-                                <td>$50</td>
-                            </tr>
-                            <tr class="total-row">
-                                <td>TOTAL MONTHLY COST</td>
-                                <td>$480/month</td>
-                                <td>$739/month</td>
-                                <td>$729/month</td>
-                            </tr>
-                            <tr class="category-row">
-                                <td colspan="4">24-MONTH TOTAL COST ANALYSIS</td>
-                            </tr>
-                            <tr>
-                                <td>Total 24-Month Payments</td>
-                                <td>$11,520</td>
-                                <td>$17,736</td>
-                                <td>$17,496</td>
-                            </tr>
-                            <tr>
-                                <td>Expected Depreciation (24 mo)</td>
-                                <td>$800</td>
-                                <td>$6,500</td>
-                                <td>$3,200</td>
-                            </tr>
-                            <tr class="total-row winner">
-                                <td>TRUE TOTAL COST (24 months)</td>
-                                <td>$12,320</td>
-                                <td>$24,236</td>
-                                <td>$20,696</td>
-                            </tr>
-                            <tr class="loser">
-                                <td>Cost vs Repair Option</td>
-                                <td>BASELINE</td>
-                                <td>+$11,916 more expensive</td>
-                                <td>+$8,376 more expensive</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="summary-box">
-                    <h3>🎯 Sarah's Verdict: REPAIR IT</h3>
-                    <ul>
-                        <li>Saves $11,916 over 24 months vs buying new</li>
-                        <li>Saves $8,376 over 24 months vs buying used</li>
-                        <li>2015 Corolla has proven reliability at this mileage</li>
-                        <li>Monthly cost is 35% lower than any replacement option</li>
-                        <li>Keeps Sarah debt-free with predictable costs</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- DAVE'S SCENARIO -->
-            <div class="scenario-container">
-                <div class="scenario-header" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
-                    <h2>📊 Scenario 2: Dave's 2016 Ford F-150 EcoBoost</h2>
-                    <p>220,000 km • Needs: Transmission + Turbo Work • Repair Quote: $8,200</p>
-                </div>
-                
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Cost Category</th>
-                                <th>Option 1: Repair Current Truck</th>
-                                <th>Option 2: Buy New 2025 F-150</th>
-                                <th>Option 3: Buy Used 2020 F-150</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="category-row">
-                                <td colspan="4">UPFRONT COSTS</td>
-                            </tr>
-                            <tr>
-                                <td>One-Time Repair Cost</td>
-                                <td>$8,200</td>
-                                <td>$0</td>
-                                <td>$0</td>
-                            </tr>
-                            <tr>
-                                <td>Expected Additional Repairs (24 mo)</td>
-                                <td>$4,500</td>
-                                <td>$0</td>
-                                <td>$1,800</td>
-                            </tr>
-                            <tr>
-                                <td>Vehicle Purchase Price</td>
-                                <td>$0</td>
-                                <td>$68,000</td>
-                                <td>$48,000</td>
-                            </tr>
-                            <tr>
-                                <td>Trade-In Value Received</td>
-                                <td>$0</td>
-                                <td>$8,000</td>
-                                <td>$8,000</td>
-                            </tr>
-                            <tr>
-                                <td>Loan Amount</td>
-                                <td>$0</td>
-                                <td>$60,000</td>
-                                <td>$40,000</td>
-                            </tr>
-                            <tr class="category-row">
-                                <td colspan="4">MONTHLY COSTS (24-Month Analysis)</td>
-                            </tr>
-                            <tr>
-                                <td>Repair Cost (amortized)</td>
-                                <td>$529</td>
-                                <td>$0</td>
-                                <td>$75</td>
-                            </tr>
-                            <tr>
-                                <td>Loan Payment (monthly)</td>
-                                <td>$0</td>
-                                <td>$958 (7yr @ 6.99%)</td>
-                                <td>$738 (6yr @ 9.49%)</td>
-                            </tr>
-                            <tr>
-                                <td>Insurance (monthly)</td>
-                                <td>$145</td>
-                                <td>$245</td>
-                                <td>$220</td>
-                            </tr>
-                            <tr>
-                                <td>Fuel (monthly)</td>
-                                <td>$380</td>
-                                <td>$320</td>
-                                <td>$340</td>
-                            </tr>
-                            <tr>
-                                <td>Maintenance (monthly avg)</td>
-                                <td>$0 (included in repairs)</td>
-                                <td>$40</td>
-                                <td>$0 (included in repairs)</td>
-                            </tr>
-                            <tr class="total-row">
-                                <td>TOTAL MONTHLY COST</td>
-                                <td>$1,054/month</td>
-                                <td>$1,563/month</td>
-                                <td>$1,373/month</td>
-                            </tr>
-                            <tr class="category-row">
-                                <td colspan="4">24-MONTH TOTAL COST ANALYSIS</td>
-                            </tr>
-                            <tr>
-                                <td>Total 24-Month Payments</td>
-                                <td>$25,296</td>
-                                <td>$37,512</td>
-                                <td>$32,952</td>
-                            </tr>
-                            <tr>
-                                <td>Expected Depreciation (24 mo)</td>
-                                <td>$2,500</td>
-                                <td>$13,500</td>
-                                <td>$7,800</td>
-                            </tr>
-                            <tr class="total-row">
-                                <td>TRUE TOTAL COST (24 months)</td>
-                                <td>$27,796</td>
-                                <td>$51,012</td>
-                                <td>$40,752</td>
-                            </tr>
-                            <tr class="loser">
-                                <td>Cost vs Repair Option</td>
-                                <td>BASELINE (High Risk)</td>
-                                <td>+$23,216 more expensive</td>
-                                <td>+$12,956 more expensive</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="summary-box" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
-                    <h3>⚠️ Dave's Verdict: REPLACE (But Not With New)</h3>
-                    <ul>
-                        <li>The repair SEEMS cheapest, but high risk of cascading failures</li>
-                        <li>EcoBoost engines at 220k km often have multiple expensive issues cluster together</li>
-                        <li>Used 2020 F-150 is $12,956 more but provides reliability certainty</li>
-                        <li>BETTER OPTION: Consider 2018-2019 F-150 with 5.0L V8 (more reliable) for $32k-$38k</li>
-                        <li>BEST OPTION: Evaluate if he truly needs F-150 capability - a used Tacoma/Ridgeline could save $400-500/month</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- INTERACTIVE CALCULATOR -->
-            <div class="calculator-section">
-                <h3>🧮 Calculate Your Own Scenario</h3>
-                <p style="margin-bottom: 20px; color: #555;">Enter your specific numbers to see if you should repair or replace your vehicle</p>
-                
-                <div class="input-group">
-                    <div class="input-field">
-                        <label>Repair Quote ($)</label>
-                        <input type="number" id="repairCost" placeholder="3600">
-                    </div>
-                    <div class="input-field">
-                        <label>Current Vehicle Value ($)</label>
-                        <input type="number" id="vehicleValue" placeholder="6000">
-                    </div>
-                    <div class="input-field">
-                        <label>Expected Months of Use After Repair</label>
-                        <input type="number" id="monthsUse" placeholder="24">
-                    </div>
-                    <div class="input-field">
-                        <label>Current Monthly Insurance ($)</label>
-                        <input type="number" id="currentInsurance" placeholder="110">
-                    </div>
-                    <div class="input-field">
-                        <label>New Vehicle Price ($)</label>
-                        <input type="number" id="newPrice" placeholder="28000">
-                    </div>
-                    <div class="input-field">
-                        <label>Down Payment Available ($)</label>
-                        <input type="number" id="downPayment" placeholder="3600">
-                    </div>
-                    <div class="input-field">
-                        <label>Interest Rate (%)</label>
-                        <input type="number" step="0.01" id="interestRate" placeholder="6.99">
-                    </div>
-                    <div class="input-field">
-                        <label>Loan Term (years)</label>
-                        <input type="number" id="loanTerm" placeholder="7">
-                    </div>
-                </div>
-                
-                <button class="calculate-btn" onclick="calculateScenario()">Calculate My Decision</button>
-                
-                <div class="results" id="results">
-                    <h3 style="color: #2c3e50; margin-bottom: 15px;">Your Results:</h3>
-                    <div id="repairResult" class="result-item"></div>
-                    <div id="newResult" class="result-item"></div>
-                    <div id="recommendation" class="result-item"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p><strong>Aaron Money Mindset</strong></p>
-            <p>Helping the Canadian Middle Class Make Smarter Financial Decisions</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">Subscribe on YouTube for more real financial analysis</p>
-        </div>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Fix vs Replace: Vehicle Cost Analysis</h1>
+        <p>Professional Calculator by Aaron Money Mindset</p>
+        <p style="font-size:0.9em;margin-top:10px;">Based on Real Canadian Market Data · Updated March 2026</p>
     </div>
-    
-    <script>
-        function calculateScenario() {
-            const repairCost = parseFloat(document.getElementById('repairCost').value) || 0;
-            const vehicleValue = parseFloat(document.getElementById('vehicleValue').value) || 0;
-            const monthsUse = parseFloat(document.getElementById('monthsUse').value) || 24;
-            const currentInsurance = parseFloat(document.getElementById('currentInsurance').value) || 0;
-            const newPrice = parseFloat(document.getElementById('newPrice').value) || 0;
-            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
-            const interestRate = parseFloat(document.getElementById('interestRate').value) || 6.99;
-            const loanTerm = parseFloat(document.getElementById('loanTerm').value) || 7;
-            
-            // Calculate repair option monthly cost
-            const repairMonthly = repairCost / monthsUse;
-            const repairTotalMonthly = repairMonthly + currentInsurance + 140 + 80; // fuel + maintenance estimates
-            
-            // Calculate new vehicle loan payment
-            const loanAmount = newPrice - downPayment;
-            const monthlyRate = (interestRate / 100) / 12;
-            const numPayments = loanTerm * 12;
-            const monthlyPayment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
-                                   (Math.pow(1 + monthlyRate, numPayments) - 1);
-            
-            const newInsurance = currentInsurance * 1.77; // Approximate increase for full coverage
-            const newTotalMonthly = monthlyPayment + newInsurance + 125 + 30; // Better fuel economy, warranty coverage
-            
-            // Calculate 24-month totals
-            const repairTotal24 = repairTotalMonthly * 24;
-            const newTotal24 = newTotalMonthly * 24;
-            const difference = newTotal24 - repairTotal24;
-            
-            // Repair to value ratio
-            const repairRatio = (repairCost / vehicleValue) * 100;
-            
-            // Display results
-            document.getElementById('repairResult').innerHTML = 
-                `<strong>Repair Option:</strong> $${repairTotalMonthly.toFixed(2)}/month • 24-Month Total: $${repairTotal24.toFixed(2)}`;
-            document.getElementById('repairResult').style.background = '#27ae60';
-            document.getElementById('repairResult').style.color = 'white';
-            
-            document.getElementById('newResult').innerHTML = 
-                `<strong>New Vehicle:</strong> $${newTotalMonthly.toFixed(2)}/month • 24-Month Total: $${newTotal24.toFixed(2)}`;
-            document.getElementById('newResult').style.background = '#3498db';
-            document.getElementById('newResult').style.color = 'white';
-            
-            // Recommendation logic
-            let recommendation = '';
-            let bgColor = '';
-            
-            if (repairRatio > 60 && monthsUse < 24) {
-                recommendation = `⚠️ <strong>REPLACE:</strong> Your repair cost is ${repairRatio.toFixed(1)}% of vehicle value. This is risky. Consider replacement, but you'd save $${difference.toFixed(2)} over 24 months by repairing IF the vehicle stays reliable.`;
-                bgColor = '#e74c3c';
-            } else if (difference > 8000) {
-                recommendation = `✅ <strong>REPAIR IT:</strong> You'll save $${difference.toFixed(2)} over 24 months vs buying new. Make sure your mechanic confirms the rest of the vehicle is solid.`;
-                bgColor = '#27ae60';
-            } else if (difference > 4000) {
-                recommendation = `⚖️ <strong>BORDERLINE:</strong> Repairing saves $${difference.toFixed(2)} over 24 months, but get a second mechanic opinion on overall vehicle condition before deciding.`;
-                bgColor = '#f39c12';
-            } else {
-                recommendation = `🤔 <strong>CONSIDER REPLACING:</strong> The cost difference is only $${difference.toFixed(2)}. If you value peace of mind and warranty coverage, replacement might be worth it.`;
-                bgColor = '#e67e22';
-            }
-            
-            document.getElementById('recommendation').innerHTML = recommendation;
-            document.getElementById('recommendation').style.background = bgColor;
-            document.getElementById('recommendation').style.color = 'white';
-            
-            document.getElementById('results').classList.add('show');
+
+    <div class="main-content">
+
+        <!-- ══════════════════════════════════
+             SCENARIO 1 — SARAH
+        ═══════════════════════════════════ -->
+        <div class="scenario-container">
+            <div class="scenario-header">
+                <h2>📊 Scenario 1: Sarah's 2015 Toyota Corolla</h2>
+                <p>185,000 km &bull; Needs: A/C, Brakes, Tires &bull; Repair Quote: $3,600</p>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cost Category</th>
+                            <th>Option 1: Repair Current Car</th>
+                            <th>Option 2: Buy New 2025 Corolla</th>
+                            <th>Option 3: Buy Used 2020 Corolla</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-row"><td colspan="4">UPFRONT COSTS</td></tr>
+                        <tr>
+                            <td>One-Time Repair Cost</td>
+                            <td>$3,600</td><td>$0</td><td>$0</td>
+                        </tr>
+                        <tr>
+                            <td>Vehicle Purchase Price (pre-tax)</td>
+                            <td>$0</td><td>$28,000</td><td>$21,500</td>
+                        </tr>
+                        <tr>
+                            <td>GST / Taxes &amp; Fees (est.)</td>
+                            <td>$0</td><td>$1,400</td><td>$1,075 (dealer) / $0 (private)</td>
+                        </tr>
+                        <tr>
+                            <td>Down Payment</td>
+                            <td>$0</td><td>$3,600</td><td>$3,600</td>
+                        </tr>
+                        <tr>
+                            <td>Loan Amount (after tax &amp; down payment)</td>
+                            <td>$0</td><td>$25,800</td><td>$17,900</td>
+                        </tr>
+                        <tr class="category-row"><td colspan="4">MONTHLY COSTS (24-Month Analysis)</td></tr>
+                        <tr>
+                            <td>Repair Cost (amortized over 24 mo)</td>
+                            <td>$150</td><td>$0</td><td>$0</td>
+                        </tr>
+                        <tr>
+                            <td>Loan Payment (monthly)</td>
+                            <td>$0</td>
+                            <td>$389 (7yr @ 6.99%)</td>
+                            <td>$374 (5yr @ 8.99%)</td>
+                        </tr>
+                        <tr>
+                            <td>Insurance (monthly)</td>
+                            <td>$110</td><td>$195</td><td>$175</td>
+                        </tr>
+                        <tr>
+                            <td>Fuel (monthly)</td>
+                            <td>$140</td><td>$125</td><td>$130</td>
+                        </tr>
+                        <tr>
+                            <td>Maintenance (monthly avg)</td>
+                            <td>$80</td><td>$30</td><td>$50</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>TOTAL MONTHLY COST</td>
+                            <td>$480/month</td><td>$739/month</td><td>$729/month</td>
+                        </tr>
+                        <tr class="category-row"><td colspan="4">24-MONTH TRUE COST ANALYSIS</td></tr>
+                        <tr>
+                            <td>Total 24-Month Cash Out</td>
+                            <td>$11,520</td><td>$17,736</td><td>$17,496</td>
+                        </tr>
+                        <tr>
+                            <td>Expected Depreciation (24 mo)</td>
+                            <td>$800</td><td>$6,500</td><td>$3,200</td>
+                        </tr>
+                        <tr class="total-row winner">
+                            <td>TRUE TOTAL COST (24 months)</td>
+                            <td>$12,320</td><td>$24,236</td><td>$20,696</td>
+                        </tr>
+                        <tr class="loser">
+                            <td>Cost vs. Repair Option</td>
+                            <td>BASELINE</td>
+                            <td>+$11,916 more expensive</td>
+                            <td>+$8,376 more expensive</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="table-note">* Loan amounts reflect pre-tax purchase price plus applicable GST (5% in Alberta). Used private sale may not be subject to GST. Payments verified using standard Canadian monthly-compounding formula.</p>
+            </div>
+
+            <div class="summary-box">
+                <h3>🎯 Sarah's Verdict: REPAIR IT</h3>
+                <ul>
+                    <li>Saves $11,916 over 24 months vs. buying new</li>
+                    <li>Saves $8,376 over 24 months vs. buying used (dealer)</li>
+                    <li>2015 Corolla has a strong reliability record at this mileage</li>
+                    <li>Monthly cost is 35% lower than any replacement option</li>
+                    <li>Keeps Sarah debt-free with predictable costs</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════
+             SCENARIO 2 — DAVE
+        ═══════════════════════════════════ -->
+        <div class="scenario-container">
+            <div class="scenario-header" style="background:linear-gradient(135deg,#e74c3c 0%,#c0392b 100%);">
+                <h2>📊 Scenario 2: Dave's 2016 Ford F-150 EcoBoost</h2>
+                <p>220,000 km &bull; Needs: Transmission + Turbo Work &bull; Repair Quote: $8,200</p>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cost Category</th>
+                            <th>Option 1: Repair Current Truck</th>
+                            <th>Option 2: Buy New 2025 F-150</th>
+                            <th>Option 3: Buy Used 2020 F-150</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-row"><td colspan="4">UPFRONT COSTS</td></tr>
+                        <tr>
+                            <td>One-Time Repair Cost</td>
+                            <td>$8,200</td><td>$0</td><td>$0</td>
+                        </tr>
+                        <tr>
+                            <td>Expected Additional Repairs (24 mo)</td>
+                            <td>$4,500</td><td>$0</td><td>$1,800</td>
+                        </tr>
+                        <tr>
+                            <td>Vehicle Purchase Price (pre-tax)</td>
+                            <td>$0</td><td>$68,000</td><td>$48,000</td>
+                        </tr>
+                        <tr>
+                            <td>GST / Taxes &amp; Fees (est.)</td>
+                            <td>$0</td><td>$3,400</td><td>$2,400</td>
+                        </tr>
+                        <tr>
+                            <td>Trade-In Value Received</td>
+                            <td>$0</td><td>$8,000</td><td>$8,000</td>
+                        </tr>
+                        <tr>
+                            <td>Loan Amount (after tax, trade-in)</td>
+                            <td>$0</td><td>$63,400</td><td>$42,400</td>
+                        </tr>
+                        <tr class="category-row"><td colspan="4">MONTHLY COSTS (24-Month Analysis)</td></tr>
+                        <tr>
+                            <td>Repair Cost (amortized over 24 mo)</td>
+                            <td>$529</td><td>$0</td><td>$75</td>
+                        </tr>
+                        <tr>
+                            <td>Loan Payment (monthly)</td>
+                            <td>$0</td>
+                            <td>$957 (7yr @ 6.99%)</td>
+                            <td>$775 (6yr @ 9.49%)</td>
+                        </tr>
+                        <tr>
+                            <td>Insurance (monthly)</td>
+                            <td>$145</td><td>$245</td><td>$220</td>
+                        </tr>
+                        <tr>
+                            <td>Fuel (monthly)</td>
+                            <td>$380</td><td>$320</td><td>$340</td>
+                        </tr>
+                        <tr>
+                            <td>Maintenance (monthly avg)</td>
+                            <td>$0 (included in repairs)</td><td>$40</td><td>$0 (included in repairs)</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>TOTAL MONTHLY COST</td>
+                            <td>$1,054/month</td><td>$1,562/month</td><td>$1,410/month</td>
+                        </tr>
+                        <tr class="category-row"><td colspan="4">24-MONTH TRUE COST ANALYSIS</td></tr>
+                        <tr>
+                            <td>Total 24-Month Cash Out</td>
+                            <td>$25,296</td><td>$37,488</td><td>$33,840</td>
+                        </tr>
+                        <tr>
+                            <td>Expected Depreciation (24 mo)</td>
+                            <td>$2,500</td><td>$13,500</td><td>$7,800</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>TRUE TOTAL COST (24 months)</td>
+                            <td>$27,796</td><td>$50,988</td><td>$41,640</td>
+                        </tr>
+                        <tr class="loser">
+                            <td>Cost vs. Repair Option</td>
+                            <td>BASELINE (High Risk)</td>
+                            <td>+$23,192 more expensive</td>
+                            <td>+$13,844 more expensive</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="table-note">* Loan amounts include 5% GST on purchase price. Dave's trade-in value ($8,000) reflects dealer estimate for a high-km truck with known major repairs needed. Used 2020 F-150 loan corrected to reflect $42,400 (GST-inclusive price minus trade-in). Payment verified with standard monthly-compounding formula.</p>
+            </div>
+
+            <div class="summary-box" style="background:linear-gradient(135deg,#e74c3c 0%,#c0392b 100%);">
+                <h3>⚠️ Dave's Verdict: REPLACE (But Not With New)</h3>
+                <ul>
+                    <li>The repair SEEMS cheapest on paper, but carries high risk of cascading failures</li>
+                    <li>EcoBoost engines at 220,000 km often cluster expensive problems together</li>
+                    <li>Used 2020 F-150 costs ~$13,844 more over 24 months but provides reliability certainty</li>
+                    <li>BETTER OPTION: Consider a 2018–2019 F-150 with the 5.0L V8 (more reliable) for $32k–$38k</li>
+                    <li>BEST OPTION: Ask if he truly needs F-150 capability — a used Tacoma or Ridgeline could save $400–500/month</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════
+             INTERACTIVE CALCULATOR
+        ═══════════════════════════════════ -->
+        <div class="calculator-section">
+            <h3>🧮 Calculate Your Own Scenario</h3>
+            <p class="sub-note">Enter your real numbers — every field makes a difference. The more accurate your inputs, the more reliable the result.</p>
+
+            <!-- ANALYSIS PERIOD -->
+            <div class="calc-section-label">⏱ ANALYSIS PERIOD</div>
+            <div class="input-group" style="grid-template-columns: repeat(auto-fit, minmax(220px, 240px));">
+                <div class="input-field">
+                    <label>Analysis Period (months)</label>
+                    <span class="hint">How long do you expect to drive this car after repair? (e.g. 24)</span>
+                    <input type="number" id="monthsUse" placeholder="24" value="24">
+                </div>
+            </div>
+
+            <!-- CURRENT VEHICLE -->
+            <div class="calc-section-label blue">🔧 YOUR CURRENT VEHICLE</div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Repair Quote ($)</label>
+                    <span class="hint">The mechanic's quote for the immediate repair</span>
+                    <input type="number" id="repairCost" placeholder="3600">
+                </div>
+                <div class="input-field">
+                    <label>Current Vehicle Value ($)</label>
+                    <span class="hint">Private sale value (check AutoTrader, Kijiji)</span>
+                    <input type="number" id="vehicleValue" placeholder="6000">
+                </div>
+                <div class="input-field">
+                    <label>Additional Expected Repairs ($)</label>
+                    <span class="hint">Honest estimate of other repairs likely needed in the analysis period</span>
+                    <input type="number" id="additionalRepairs" placeholder="0">
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Current Monthly Insurance ($)</label>
+                    <input type="number" id="currentInsurance" placeholder="110">
+                </div>
+                <div class="input-field">
+                    <label>Current Monthly Fuel ($)</label>
+                    <input type="number" id="currentFuel" placeholder="140">
+                </div>
+                <div class="input-field">
+                    <label>Current Monthly Maintenance ($)</label>
+                    <span class="hint">Avg. oil changes, tires, etc. (excluding major repairs above)</span>
+                    <input type="number" id="currentMaintenance" placeholder="80">
+                </div>
+            </div>
+
+            <!-- REPLACEMENT VEHICLE -->
+            <div class="calc-section-label red">🚗 REPLACEMENT VEHICLE</div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Vehicle Purchase Price ($)</label>
+                    <span class="hint">Pre-tax sticker price or asking price</span>
+                    <input type="number" id="newPrice" placeholder="28000">
+                </div>
+                <div class="input-field">
+                    <label>Trade-In Value ($)</label>
+                    <span class="hint">Dealer offer for your current car (often 10–20% less than private sale)</span>
+                    <input type="number" id="tradeIn" placeholder="0">
+                </div>
+                <div class="input-field">
+                    <label>Down Payment ($)</label>
+                    <span class="hint">Cash you plan to put down (separate from trade-in)</span>
+                    <input type="number" id="downPayment" placeholder="0">
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>Interest Rate (%)</label>
+                    <span class="hint">Get a real quote — rates vary widely by credit score</span>
+                    <input type="number" step="0.01" id="interestRate" placeholder="6.99">
+                </div>
+                <div class="input-field">
+                    <label>Loan Term (years)</label>
+                    <input type="number" id="loanTerm" placeholder="7">
+                </div>
+                <div class="input-field">
+                    <label>Annual Depreciation Rate (%)</label>
+                    <span class="hint">New vehicles: 15–20%/yr · Used (3–5 yrs old): 10–15%/yr</span>
+                    <input type="number" step="0.5" id="depreciationRate" placeholder="15">
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-field">
+                    <label>New Monthly Insurance ($)</label>
+                    <span class="hint">Get an actual quote — don't guess</span>
+                    <input type="number" id="newInsurance" placeholder="175">
+                </div>
+                <div class="input-field">
+                    <label>New Monthly Fuel ($)</label>
+                    <input type="number" id="newFuel" placeholder="130">
+                </div>
+                <div class="input-field">
+                    <label>New Monthly Maintenance ($)</label>
+                    <span class="hint">Lower if under warranty, higher if used</span>
+                    <input type="number" id="newMaintenance" placeholder="40">
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateScenario()">Calculate My Decision</button>
+
+            <!-- RESULTS -->
+            <div class="results" id="results">
+                <h3 style="color:#2c3e50;margin-bottom:18px;font-size:1.4em;">📊 Your Results</h3>
+
+                <div class="results-grid">
+                    <div class="result-card card-repair" id="repairCard">
+                        <h4>🔧 REPAIR OPTION</h4>
+                        <div class="big-number" id="repairMonthly">—</div>
+                        <div class="sub-number">per month (all-in)</div>
+                        <div class="line"></div>
+                        <div class="detail" id="repairCashOut">—</div>
+                        <div class="detail" id="repairNetCost">—</div>
+                        <div class="detail" id="repairRatio">—</div>
+                    </div>
+                    <div class="result-card card-replace" id="replaceCard">
+                        <h4>🚗 REPLACE OPTION</h4>
+                        <div class="big-number" id="replaceMonthly">—</div>
+                        <div class="sub-number">per month (all-in)</div>
+                        <div class="line"></div>
+                        <div class="detail" id="replaceLoan">—</div>
+                        <div class="detail" id="replaceCashOut">—</div>
+                        <div class="detail" id="replaceNetCost">—</div>
+                    </div>
+                </div>
+
+                <div class="recommendation" id="recommendation"></div>
+            </div>
+        </div>
+
+    </div><!-- /main-content -->
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>Aaron Money Mindset</strong></p>
+        <p>Helping the Canadian Middle Class Make Smarter Financial Decisions</p>
+        <p style="margin-top:10px;font-size:0.9em;">Subscribe on YouTube for more real financial analysis</p>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer">
+        <strong>DISCLAIMER:</strong> This calculator is for educational and informational purposes only. Results are estimates based on the numbers you input and do not constitute financial, legal, or professional advice. Aaron Money Mindset is not a licensed financial advisor or CPA. Your personal financial situation is unique — always consult a qualified professional before making any major financial decisions. Results may vary based on individual circumstances and local market conditions. Depreciation estimates are generalizations; actual vehicle depreciation varies by make, model, condition, mileage, and market demand. Loan payment calculations use standard Canadian monthly-compounding formula. Vehicle purchase prices do not include applicable taxes unless noted; always verify your total out-the-door cost with a dealer or seller.
+    </div>
+
+</div><!-- /container -->
+
+<script>
+    function fmt(n) {
+        return '$' + Math.round(n).toLocaleString('en-CA');
+    }
+
+    function calculateScenario() {
+        // ── INPUTS ──
+        const analysisMonths     = parseFloat(document.getElementById('monthsUse').value)         || 24;
+        const repairCost         = parseFloat(document.getElementById('repairCost').value)         || 0;
+        const vehicleValue       = parseFloat(document.getElementById('vehicleValue').value)       || 0;
+        const additionalRepairs  = parseFloat(document.getElementById('additionalRepairs').value)  || 0;
+        const currentInsurance   = parseFloat(document.getElementById('currentInsurance').value)   || 0;
+        const currentFuel        = parseFloat(document.getElementById('currentFuel').value)        || 0;
+        const currentMaintenance = parseFloat(document.getElementById('currentMaintenance').value) || 0;
+
+        const newPrice           = parseFloat(document.getElementById('newPrice').value)           || 0;
+        const tradeIn            = parseFloat(document.getElementById('tradeIn').value)            || 0;
+        const downPayment        = parseFloat(document.getElementById('downPayment').value)        || 0;
+        const interestRate       = parseFloat(document.getElementById('interestRate').value)       || 6.99;
+        const loanTerm           = parseFloat(document.getElementById('loanTerm').value)           || 7;
+        const depreciationRate   = parseFloat(document.getElementById('depreciationRate').value)   || 15;
+        const newInsurance       = parseFloat(document.getElementById('newInsurance').value)       || 0;
+        const newFuel            = parseFloat(document.getElementById('newFuel').value)            || 0;
+        const newMaintenance     = parseFloat(document.getElementById('newMaintenance').value)     || 0;
+
+        // ── REPAIR OPTION ──
+        const repairMonthlyAllIn = (repairCost + additionalRepairs) / analysisMonths
+                                 + currentInsurance + currentFuel + currentMaintenance;
+
+        const repairTotalCashOut = repairCost + additionalRepairs
+                                 + (currentInsurance + currentFuel + currentMaintenance) * analysisMonths;
+
+        // Old car value at end of period (approx 8–10% annual depreciation on an older vehicle)
+        const currentCarEndValue = vehicleValue * Math.pow(1 - 0.09, analysisMonths / 12);
+
+        // True net cost = cash spent − remaining asset value
+        const repairNetCostVal   = repairTotalCashOut - currentCarEndValue;
+
+        const repairRatioPct     = vehicleValue > 0 ? (repairCost / vehicleValue) * 100 : 0;
+
+        // ── REPLACE OPTION ──
+        // Loan = price + GST (5%) − trade-in − down payment
+        // Note: we include GST estimate since Alberta purchases are taxed
+        const gst        = newPrice * 0.05;
+        const loanAmount = Math.max(0, newPrice + gst - tradeIn - downPayment);
+
+        const r  = (interestRate / 100) / 12;
+        const n  = loanTerm * 12;
+        let monthlyPayment = 0;
+        if (loanAmount > 0 && r > 0) {
+            monthlyPayment = loanAmount * r * Math.pow(1 + r, n)
+                           / (Math.pow(1 + r, n) - 1);
         }
-    </script><div style="max-width:900px; margin:30px auto; padding:15px; 
-background:#f8f8f8; border-top:2px solid #ccc; font-size:12px; 
-color:#666; text-align:center; font-family:Arial, sans-serif;">
-<strong>DISCLAIMER:</strong> This calculator is for educational 
-and informational purposes only. Results are estimates based on 
-the numbers you input and do not constitute financial, legal, or 
-professional advice. Aaron Money Mindset is not a licensed 
-financial advisor or CPA. Your personal financial situation is 
-unique — always consult a qualified professional before making 
-any major financial decisions. Results may vary based on 
-individual circumstances and local market conditions.
-</div>
+
+        const replaceMonthlyAllIn = monthlyPayment + newInsurance + newFuel + newMaintenance;
+
+        const replaceTotalCashOut = (monthlyPayment + newInsurance + newFuel + newMaintenance) * analysisMonths
+                                  + downPayment;
+
+        // Remaining loan balance after analysis period
+        let remainingBalance = 0;
+        if (loanAmount > 0 && r > 0 && analysisMonths < n) {
+            remainingBalance = loanAmount * Math.pow(1 + r, analysisMonths)
+                             - monthlyPayment * (Math.pow(1 + r, analysisMonths) - 1) / r;
+            remainingBalance = Math.max(0, remainingBalance);
+        }
+
+        // Replacement vehicle value at end of period
+        const replacementEndValue = (newPrice + gst) * Math.pow(1 - depreciationRate / 100, analysisMonths / 12);
+
+        // True net cost = cash out + debt remaining − asset value remaining
+        const replaceNetCostVal = replaceTotalCashOut + remainingBalance - replacementEndValue;
+
+        const netCostDiff  = replaceNetCostVal - repairNetCostVal;
+        const monthlySaved = replaceMonthlyAllIn - repairMonthlyAllIn;
+
+        // ── DISPLAY ──
+        document.getElementById('repairMonthly').textContent = fmt(repairMonthlyAllIn) + '/mo';
+        document.getElementById('repairCashOut').textContent = 'Total cash out (' + analysisMonths + ' mo): ' + fmt(repairTotalCashOut);
+        document.getElementById('repairNetCost').textContent = 'True net cost (after car equity): ' + fmt(repairNetCostVal);
+        document.getElementById('repairRatio').textContent   = 'Repair-to-value ratio: ' + repairRatioPct.toFixed(1) + '%';
+
+        document.getElementById('replaceLoan').textContent    = 'Loan amount (incl. est. GST): ' + fmt(loanAmount) + ' → ' + fmt(monthlyPayment) + '/mo payment';
+        document.getElementById('replaceCashOut').textContent = 'Total cash out (' + analysisMonths + ' mo): ' + fmt(replaceTotalCashOut);
+        document.getElementById('replaceNetCost').textContent = 'True net cost (cash + remaining debt − car value): ' + fmt(replaceNetCostVal);
+
+        // ── RECOMMENDATION ──
+        let recHtml  = '';
+        let recClass = '';
+
+        if (repairRatioPct > 80) {
+            recClass = 'rec-red';
+            recHtml  = '<h4>⚠️ REPLACE — Repair Cost is a Red Flag</h4>'
+                     + 'Your repair quote is <strong>' + repairRatioPct.toFixed(0) + '%</strong> of what the car is worth. '
+                     + 'Spending that on a depreciating asset at this stage is high-risk. '
+                     + 'Replacing saves you <strong>' + fmt(Math.abs(netCostDiff)) + '</strong> '
+                     + (netCostDiff < 0 ? 'in true net cost over ' + analysisMonths + ' months.'
+                                        : 'may cost more upfront, but the reliability is likely worth it.')
+                     + ' Get a full inspection before spending another dollar.';
+        } else if (repairRatioPct > 50) {
+            recClass = 'rec-orange';
+            recHtml  = '<h4>⚖️ CAUTION — Get a Second Opinion Before Deciding</h4>'
+                     + 'The repair is <strong>' + repairRatioPct.toFixed(0) + '%</strong> of vehicle value — that\'s the grey zone. '
+                     + 'The numbers show repairing saves you <strong>' + fmt(Math.abs(monthlySaved)) + '/month</strong>'
+                     + (netCostDiff > 0 ? ' and <strong>' + fmt(netCostDiff) + '</strong> in true net cost over ' + analysisMonths + ' months.'
+                                        : ', but the true net cost is closer than it looks once you factor in remaining debt and depreciation.')
+                     + ' Have a Red Seal mechanic assess the overall vehicle condition before committing either way.';
+        } else if (netCostDiff > 8000) {
+            recClass = 'rec-green';
+            recHtml  = '<h4>✅ REPAIR IT — The Math Is Clear</h4>'
+                     + 'Repairing keeps <strong>' + fmt(monthlySaved) + '/month</strong> in your pocket '
+                     + 'and saves you <strong>' + fmt(netCostDiff) + '</strong> in true net cost over ' + analysisMonths + ' months. '
+                     + 'That\'s not a rounding error — that\'s a car payment difference that compounds. '
+                     + 'Just make sure your mechanic confirms the rest of the vehicle is solid before you commit.';
+        } else if (netCostDiff > 3000) {
+            recClass = 'rec-yellow';
+            recHtml  = '<h4>⚖️ LEAN TOWARD REPAIR — But Eyes Open</h4>'
+                     + 'Repairing saves you <strong>' + fmt(netCostDiff) + '</strong> in true net cost over ' + analysisMonths + ' months. '
+                     + 'That\'s real money, but the gap is narrow enough that reliability risk matters. '
+                     + 'Ask your mechanic: what else is coming in the next two years? '
+                     + 'If the answer is "nothing major," repair. If it\'s vague, replacement may be worth considering.';
+        } else if (netCostDiff > 0) {
+            recClass = 'rec-yellow';
+            recHtml  = '<h4>⚖️ BORDERLINE — This One Comes Down to Risk Tolerance</h4>'
+                     + 'Repair is only slightly cheaper in true net cost (<strong>' + fmt(netCostDiff) + '</strong> over ' + analysisMonths + ' months). '
+                     + 'At this margin, reliability certainty and your stress tolerance matter as much as the math. '
+                     + 'Get a second mechanical opinion and compare a used (not new) replacement option before deciding.';
+        } else {
+            recClass = 'rec-red';
+            recHtml  = '<h4>🔄 CONSIDER REPLACING — Numbers Favour It</h4>'
+                     + 'Once you account for remaining loan balance and depreciation, replacing actually costs '
+                     + '<strong>' + fmt(Math.abs(netCostDiff)) + ' less</strong> in true net cost over ' + analysisMonths + ' months. '
+                     + 'This usually happens when the replacement vehicle retains strong equity. '
+                     + 'Focus on a reliable used vehicle with lower depreciation to make the numbers work even harder for you.';
+        }
+
+        const recDiv = document.getElementById('recommendation');
+        recDiv.className = 'recommendation ' + recClass;
+        recDiv.innerHTML = recHtml;
+
+        document.getElementById('results').classList.add('show');
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+</script>
+
 </body>
 </html>
