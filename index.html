@@ -712,7 +712,7 @@
 
         if (repairRatioPct > 80) {
             recClass = 'rec-red';
-            recHtml  = '<h4>⚠️ REPLACE — Repair Cost is a Red Flag</h4>'
+            recHtml  = '<h4>⚠️ Recommendation: Replace This Vehicle</h4>'
                      + 'Your repair quote is <strong>' + repairRatioPct.toFixed(0) + '%</strong> of what the car is worth. '
                      + 'Spending that on a depreciating asset at this stage is high-risk. '
                      + 'Replacing saves you <strong>' + fmt(Math.abs(netCostDiff)) + '</strong> '
@@ -721,7 +721,7 @@
                      + ' Get a full inspection before spending another dollar.';
         } else if (repairRatioPct > 50) {
             recClass = 'rec-orange';
-            recHtml  = '<h4>⚖️ CAUTION — Get a Second Opinion Before Deciding</h4>'
+            recHtml  = '<h4>⚖️ Recommendation: Proceed With Caution</h4>'
                      + 'The repair is <strong>' + repairRatioPct.toFixed(0) + '%</strong> of vehicle value — that\'s the grey zone. '
                      + 'The numbers show repairing saves you <strong>' + fmt(Math.abs(monthlySaved)) + '/month</strong>'
                      + (netCostDiff > 0 ? ' and <strong>' + fmt(netCostDiff) + '</strong> in true net cost over ' + analysisMonths + ' months.'
@@ -729,27 +729,27 @@
                      + ' Have a Red Seal mechanic assess the overall vehicle condition before committing either way.';
         } else if (netCostDiff > 8000) {
             recClass = 'rec-green';
-            recHtml  = '<h4>✅ REPAIR IT — The Math Is Clear</h4>'
+            recHtml  = '<h4>✅ Recommendation: Repair Your Vehicle</h4>'
                      + 'Repairing keeps <strong>' + fmt(monthlySaved) + '/month</strong> in your pocket '
                      + 'and saves you <strong>' + fmt(netCostDiff) + '</strong> in true net cost over ' + analysisMonths + ' months. '
                      + 'That\'s not a rounding error — that\'s a car payment difference that compounds. '
                      + 'Just make sure your mechanic confirms the rest of the vehicle is solid before you commit.';
         } else if (netCostDiff > 3000) {
             recClass = 'rec-yellow';
-            recHtml  = '<h4>⚖️ LEAN TOWARD REPAIR — But Eyes Open</h4>'
+            recHtml  = '<h4>⚖️ Recommendation: Lean Toward Repairing</h4>'
                      + 'Repairing saves you <strong>' + fmt(netCostDiff) + '</strong> in true net cost over ' + analysisMonths + ' months. '
                      + 'That\'s real money, but the gap is narrow enough that reliability risk matters. '
                      + 'Ask your mechanic: what else is coming in the next two years? '
                      + 'If the answer is "nothing major," repair. If it\'s vague, replacement may be worth considering.';
         } else if (netCostDiff > 0) {
             recClass = 'rec-yellow';
-            recHtml  = '<h4>⚖️ BORDERLINE — This One Comes Down to Risk Tolerance</h4>'
+            recHtml  = '<h4>⚖️ Recommendation: Borderline — Use Your Judgment</h4>'
                      + 'Repair is only slightly cheaper in true net cost (<strong>' + fmt(netCostDiff) + '</strong> over ' + analysisMonths + ' months). '
                      + 'At this margin, reliability certainty and your stress tolerance matter as much as the math. '
                      + 'Get a second mechanical opinion and compare a used (not new) replacement option before deciding.';
         } else {
             recClass = 'rec-red';
-            recHtml  = '<h4>🔄 CONSIDER REPLACING — Numbers Favour It</h4>'
+            recHtml  = '<h4>🔄 Recommendation: Consider Replacing</h4>'
                      + 'Once you account for remaining loan balance and depreciation, replacing actually costs '
                      + '<strong>' + fmt(Math.abs(netCostDiff)) + ' less</strong> in true net cost over ' + analysisMonths + ' months. '
                      + 'This usually happens when the replacement vehicle retains strong equity. '
