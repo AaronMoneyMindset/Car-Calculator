@@ -698,6 +698,7 @@
 
         // ── DISPLAY ──
         document.getElementById('repairMonthly').textContent = fmt(repairMonthlyAllIn) + '/mo';
+        document.getElementById('replaceMonthly').textContent = fmt(replaceMonthlyAllIn) + '/mo';
         document.getElementById('repairCashOut').textContent = 'Total cash out (' + analysisMonths + ' mo): ' + fmt(repairTotalCashOut);
         document.getElementById('repairNetCost').textContent = 'True net cost (after car equity): ' + fmt(repairNetCostVal);
         document.getElementById('repairRatio').textContent   = 'Repair-to-value ratio: ' + repairRatioPct.toFixed(1) + '%';
